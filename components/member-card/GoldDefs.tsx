@@ -34,6 +34,27 @@ export default function GoldDefs() {
           <stop offset="1" stopColor="#8A6A1F" stopOpacity="0" />
         </radialGradient>
 
+        {/* Edge darkening for depth */}
+        <radialGradient id="vbc-vignette" cx="0.5" cy="0.5" r="0.75">
+          <stop offset="0.45" stopColor="#3D2E0B" stopOpacity="0" />
+          <stop offset="1" stopColor="#3D2E0B" stopOpacity="0.55" />
+        </radialGradient>
+
+        {/* Engraved bezel around the medallion, centred on (0,0) */}
+        <g id="vbc-bezel" fill="none">
+          <circle r="75" stroke="#5E4714" strokeOpacity="0.55" strokeWidth="0.8" />
+          <circle r="70" stroke="#FFF4D2" strokeWidth="2.4" strokeDasharray="0 5.5" strokeLinecap="round" strokeOpacity="0.85" />
+          <circle r="66" stroke="#5E4714" strokeOpacity="0.6" strokeWidth="0.8" />
+        </g>
+
+        {/* Corner ornament for the top-left inner corner; mirrored for the others */}
+        <g id="vbc-corner" fill="none">
+          <path d="M18 46 A28 28 0 0 1 46 18" stroke="#5E4714" strokeWidth="1" strokeOpacity="0.7" />
+          <path d="M18 38 A20 20 0 0 1 38 18" stroke="#FFF4D2" strokeWidth="0.8" strokeOpacity="0.7" />
+          <path d="M18 30 A12 12 0 0 1 30 18" stroke="#5E4714" strokeWidth="0.8" strokeOpacity="0.7" />
+          <path d="M26 20 L31 25 L26 30 L21 25 Z" fill="#FFF4D2" fillOpacity="0.75" stroke="#5E4714" strokeWidth="0.6" transform="translate(-1 -1)" />
+        </g>
+
         {/* Rays, centred on (0,0) */}
         <g id="vbc-rays">
           {Array.from({ length: RAYS }, (_, i) => {
@@ -103,6 +124,10 @@ export default function GoldDefs() {
           <rect x="0.75" y="0.75" width="398.5" height="238.5" fill="none" stroke="#FFF4D2" strokeOpacity="0.6" strokeWidth="1.5" />
           <rect x="12" y="12" width="376" height="216" fill="none" stroke="#5E4714" strokeWidth="1.2" />
           <rect x="15" y="15" width="370" height="210" fill="none" stroke="#FFF4D2" strokeOpacity="0.45" strokeWidth="0.6" />
+          <use href="#vbc-corner" />
+          <use href="#vbc-corner" transform="translate(400 0) scale(-1 1)" />
+          <use href="#vbc-corner" transform="translate(0 240) scale(1 -1)" />
+          <use href="#vbc-corner" transform="translate(400 240) scale(-1 -1)" />
         </g>
       </defs>
     </svg>

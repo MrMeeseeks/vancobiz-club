@@ -25,7 +25,7 @@ function instagramHandle(v: string) {
  * Engraved gold-foil member plate. Requires <GoldDefs /> once on the page.
  * Markup + member-card.css are plain HTML/CSS so the card can be pasted into Elementor.
  */
-export default function MemberCard({ member }: { member: Member }) {
+export default function MemberCard({ member, number }: { member: Member; number?: number }) {
   const ig = member.instagram ? instagramHandle(member.instagram) : null;
   const photo = member.photo ? (member.photo.startsWith("/") ? BASE + member.photo : member.photo) : null;
 
@@ -37,9 +37,15 @@ export default function MemberCard({ member }: { member: Member }) {
           <use href="#vbc-rays" x="200" y="120" />
           <use href="#vbc-guilloche" x="200" y="120" />
           <rect width="400" height="240" fill="url(#vbc-glow)" />
+          <rect width="400" height="240" fill="url(#vbc-vignette)" />
+          <use href="#vbc-bezel" x="200" y="120" />
           <use href="#vbc-frame" />
         </svg>
         <span className="vbc-card__sheen" aria-hidden="true" />
+        {/* Light layers driven by member-card-tilt.js (CSS variables); static without it */}
+        <span className="vbc-card__holo" aria-hidden="true" />
+        <span className="vbc-card__glare" aria-hidden="true" />
+        <span className="vbc-card__rim" aria-hidden="true" />
         <div className="vbc-card__medallion">
           {photo ? (
             <img src={photo} alt={`Portrait of ${member.name}`} loading="lazy" />
@@ -52,6 +58,7 @@ export default function MemberCard({ member }: { member: Member }) {
       </div>
 
       <div className="vbc-card__body">
+        {number !== undefined && <p className="vbc-card__number">Member No. {String(number).padStart(2, "0")}</p>}
         <h3 className="vbc-card__name">{member.name}</h3>
         <p className="vbc-card__category">{member.category}</p>
         {(member.phone || ig) && (
@@ -79,6 +86,7 @@ export default function MemberCard({ member }: { member: Member }) {
           </ul>
         )}
       </div>
+      <span className="vbc-card__gloss" aria-hidden="true" />
     </article>
   );
 }

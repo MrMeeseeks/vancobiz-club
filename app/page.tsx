@@ -2,6 +2,7 @@
 import members from "@/data/members.json";
 import GoldDefs from "@/components/member-card/GoldDefs";
 import MemberCard, { type Member } from "@/components/member-card/MemberCard";
+import CardEffects from "@/components/member-card/CardEffects";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const MAIN_SITE = "https://mrmeeseeks.github.io/vancobiz/";
@@ -19,6 +20,7 @@ export default function MembersPage() {
   return (
     <>
       <GoldDefs />
+      <CardEffects />
 
       <header id="top" className="sticky top-0 z-40 border-b border-gold-light/15 bg-obsidian/85 backdrop-blur-md">
         <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-5">
@@ -58,6 +60,16 @@ export default function MembersPage() {
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_0%,color-mix(in_srgb,var(--gold)_22%,transparent),transparent_70%)]"
           />
+          {/* Engraving watermark, reusing the card patterns */}
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            viewBox="-320 -200 640 400"
+            className="pointer-events-none absolute inset-0 m-auto h-full w-full max-w-5xl opacity-40 [mask-image:radial-gradient(closest-side,black_35%,transparent)]"
+          >
+            <use href="#vbc-rays" />
+            <use href="#vbc-guilloche" />
+          </svg>
           <div className="relative mx-auto max-w-6xl px-5 py-20 text-center sm:py-28">
             <p className="eyebrow">VancoBiz Club</p>
             <h1 id="page-title" className="display text-foil mt-4 text-[clamp(2.75rem,9vw,6rem)] leading-none">
@@ -76,9 +88,9 @@ export default function MembersPage() {
             Member directory
           </h2>
           <ul className="grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {list.map((m) => (
+            {list.map((m, i) => (
               <li key={m.name} className="h-full">
-                <MemberCard member={m} />
+                <MemberCard member={m} number={i + 1} />
               </li>
             ))}
           </ul>
@@ -87,6 +99,9 @@ export default function MembersPage() {
         {/* Join */}
         <section aria-labelledby="join-title" className="px-5 pb-24">
           <div className="relative mx-auto max-w-4xl overflow-hidden rounded-[28px] border border-gold-light/30 bg-surface px-6 py-14 text-center sm:px-12">
+            <svg aria-hidden="true" focusable="false" className="absolute inset-x-0 top-0 h-3 w-full">
+              <rect width="100%" height="12" fill="url(#vbc-border-motif)" />
+            </svg>
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_90%_at_50%_120%,color-mix(in_srgb,var(--gold)_25%,transparent),transparent_70%)]"

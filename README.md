@@ -61,9 +61,20 @@ The card is plain HTML + CSS on purpose.
    change the name, category, initials or `<img>`, phone and Instagram link.
 4. **Fonts.** The CSS uses Syne (800) and Inter. Add them with Elementor's custom fonts or a
    Google Fonts link. Without them it falls back to the system sans-serif.
+5. **Tilt and light (optional).** `components/member-card/member-card-tilt.js` is plain JS
+   with no dependencies. Remove the `export` keyword, paste it into a footer script
+   (or an HTML widget inside `<script>…</script>`) and add `vbcCardTilt();` after it.
+   Without the script the cards still look right; they just don't tilt.
 
-The sheen moves only on hover and is turned off when the visitor has
-"reduce motion" enabled.
+The tilt and moving light run only with a mouse and are off for touch screens and for visitors
+with "reduce motion" enabled. The script only sets CSS variables (`--vbc-rx`, `--vbc-ry`,
+`--vbc-mx`, `--vbc-my`, `--vbc-angle`, `--vbc-ring`, `--vbc-on`); everything visual is in the CSS:
+
+- the card leans toward the cursor (up to 9°, like the main site's service cards)
+- a glare spot follows the cursor across the plate
+- a warm foil band shifts angle and position, so different parts of the engraving light up
+- a glint runs around the ornamental border on the side facing the light
+- the medallion ring glows as the cursor gets close to it
 
 ## Accessibility
 

@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/* Club palette. Gold replaces the main site's orange/purple accents on Club pages.
+   Shared with the main site: obsidian ground, Syne + Inter, rounded-full buttons, 28px card radius. */
+:root {
+  color-scheme: dark;
+  --obsidian: #09090b;
+  --surface: #121214;
+  --offwhite: #f9f9f9;
+  --gold-light: #f3d98b;
+  --gold: #c9a24b;
+  --gold-deep: #8a6a1f;
+  --gold-highlight: #ffc66b;
+  --text-muted: #b9b9c0; /* 9.6:1 on --surface */
+}
+
+@theme inline {
+  --color-obsidian: var(--obsidian);
+  --color-surface: var(--surface);
+  --color-offwhite: var(--offwhite);
+  --color-gold-light: var(--gold-light);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-highlight: var(--gold-highlight);
+  --font-display: var(--font-syne);
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--obsidian);
+  color: var(--offwhite);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--gold-highlight);
+  color: var(--obsidian);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-highlight);
+  outline-offset: 3px;
+}
+
+@layer components {
+  .display {
+    @apply font-display font-extrabold tracking-tight;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.2em] uppercase;
+    color: var(--gold-light);
+  }
+  /* Same shape as the main site's .btn-glow, in gold. */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition;
+    color: var(--obsidian);
+    background: linear-gradient(100deg, var(--gold-light), var(--gold-highlight) 45%, var(--gold));
+    box-shadow:
+      0 0 24px color-mix(in srgb, var(--gold-highlight) 40%, transparent),
+      inset 0 0 0 1px rgb(255 255 255 / 0.45);
+  }
+  .btn-gold:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 40px color-mix(in srgb, var(--gold-highlight) 65%, transparent),
+      inset 0 0 0 1px rgb(255 255 255 / 0.6);
+  }
+  .text-foil {
+    background: linear-gradient(100deg, var(--gold-light) 0%, var(--gold-highlight) 40%, var(--gold) 75%, var(--gold-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
